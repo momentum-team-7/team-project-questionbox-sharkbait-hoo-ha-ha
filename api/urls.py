@@ -5,8 +5,10 @@ from . import views
 urlpatterns = [
     path('questions/', views.QuestionList.as_view(), name='question-list'),
     path('questions/<int:pk>/', views.QuestionDetail.as_view(),
-         name='question-detail'),
+        name='question-detail'),
     path('answers/', views.AnswerList.as_view(), name='answer-list'),
+    path('answers/<int:pk>/', views.AnswerDetail.as_view(), 
+        name='answer-detail'),
     path('users/', views.UserList.as_view(), name='user-list'),
 ]
 

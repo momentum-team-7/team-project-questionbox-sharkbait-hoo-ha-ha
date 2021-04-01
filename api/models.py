@@ -26,7 +26,7 @@ class Answer(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(default=0)
     question = models.ForeignKey(
-        Question, related_name='question', on_delete=models.CASCADE)
+        Question, related_name='answers', on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['date_created']
