@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from .models import Question, Answer
 
 
+
+
+
 class AnswerSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
 
