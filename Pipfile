@@ -11,6 +11,9 @@ django-on-heroku = "*"
 gunicorn = "*"
 django-environ = "*"
 django-cors-headers = "*"
+djoser = "*"
+djangorestframework-simplejwt = "*"
+django-extensions = "*"
 
 [dev-packages]
 
