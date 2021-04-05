@@ -36,3 +36,9 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'questions', 'answers', ]
+
+
+class SearchSerializer(serializers.Serializer):
+    # questions = QuestionSerializer(many=True, read_only=True)
+    # answers = AnswerSerializer(many=True, read_only=True)
+    pass
