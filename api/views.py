@@ -2,20 +2,19 @@ from rest_framework import generics, permissions, filters
 from .permissions import IsOwnerOrReadOnly
 from .models import Question, Answer
 from django.contrib.auth.models import User
+from django.contrib.postgres.search import SearchVector
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from .serializers import QuestionSerializer, AnswerSerializer, UserSerializer
 
 
-@api_view(['GET'])
-def api_root(request, format=None):
-    return Response({
-        'users': reverse('user-list', request=request, format=format),
-        'questions': reverse('question-list', request=request, format=format),
-        'answers': reverse('answer-list', request=request, format=format)
-    })
-
+class Search(generics.ListAPIView):
+    search_fields = ['body', 'question__title', 'question__body']
+    filter_backends = (filters.SearchFilter,)
+    queryset = Answer.objects.all()
+    serializer_class = AnswerSerializer
+    # currently searches over Qs and As, but only displays As. gotta update. (can also do one that only searches/displays Qs)
 
 class QuestionList(generics.ListCreateAPIView):
     queryset = Question.objects.all()
