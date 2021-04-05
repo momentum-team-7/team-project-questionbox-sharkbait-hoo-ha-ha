@@ -10,10 +10,10 @@ from .serializers import QuestionSerializer, AnswerSerializer, UserSerializer
 
 
 class Search(generics.ListAPIView):
-    search_fields = ['body', 'question__title', 'question__body']
+    search_fields = ['answers__body', 'questions__title', 'questions__body']
     filter_backends = (filters.SearchFilter,)
-    queryset = Answer.objects.all()
-    serializer_class = AnswerSerializer
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
     # currently searches over Qs and As, but only displays As. gotta update. (can also do one that only searches/displays Qs)
 
 class QuestionList(generics.ListCreateAPIView):
