@@ -9,11 +9,12 @@ from .models import Question, Answer
 
 class AnswerSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
+    owner_id = serializers.ReadOnlyField(source='owner.id')
 
     class Meta:
         model = Answer
         fields = [
-            'id', 'owner', 'body', 'date_created', 'likes', 'question',
+            'id', 'owner', 'owner_id', 'body', 'date_created', 'likes', 'question',
         ]
 
 
@@ -21,11 +22,12 @@ class QuestionSerializer(serializers.ModelSerializer):
     # answers = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     answers = AnswerSerializer(many=True, read_only=True)
     owner = serializers.ReadOnlyField(source='owner.username')
+    owner_id = serializers.ReadOnlyField(source='owner.id')
 
     class Meta:
         model = Question
         fields = [
-            'id', 'owner', 'title', 'body', 'date_created', 'likes', 'answered', 'answers',
+            'id', 'owner', 'owner_id', 'title', 'body', 'date_created', 'likes', 'answered', 'answers',
         ]
 
 
