@@ -33,6 +33,17 @@ class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
+    def put(self, request, pk):
+        obj = Question.objects.get(id=pk)
+        if request.user not in obj.likers.all():
+            obj.likers.add(request.user)
+            return Response({'detail': 'Answer favorited'})
+        elif request.user in obj.likers.all():
+            obj.likers.remove(request.user)
+            return Response({'detail': 'UnFavorited'})
+
+        return Response({'detail': 'Failure'})
+
 
 class AnswerList(generics.ListCreateAPIView):
     queryset = Answer.objects.all()
@@ -55,6 +66,17 @@ class AnswerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def put(self, request, pk):
+        obj = Answer.objects.get(id=pk)
+        if request.user not in obj.likers.all():
+            obj.likers.add(request.user)
+            return Response({'detail': 'Answer favorited'})
+        elif request.user in obj.likers.all():
+            obj.likers.remove(request.user)
+            return Response({'detail': 'UnFavorited'})
+
+        return Response({'detail': 'Failure'})
 
 
 class UserList(generics.ListCreateAPIView):
