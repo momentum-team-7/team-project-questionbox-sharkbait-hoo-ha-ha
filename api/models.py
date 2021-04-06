@@ -10,6 +10,7 @@ class Question(models.Model):
     body = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(default=0)
+    likers = models.ManyToManyField('auth.User', related_name='question_likes')
     answered = models.BooleanField(default=False)
 
     class Meta:
@@ -25,6 +26,7 @@ class Answer(models.Model):
     body = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(default=0)
+    likers = models.ManyToManyField('auth.User', related_name='answer_likes')
     question = models.ForeignKey(
         Question, related_name='answers', on_delete=models.CASCADE)
 

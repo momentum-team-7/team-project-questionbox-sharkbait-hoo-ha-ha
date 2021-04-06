@@ -12,7 +12,7 @@ class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
         fields = [
-            'id', 'owner', 'owner_id', 'body', 'date_created', 'likes', 'question', 'question_title',
+            'id', 'owner', 'owner_id', 'body', 'date_created', 'likes', 'question', 'question_title', 'likers',
         ]
 
 
@@ -36,7 +36,7 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = [
-            'id', 'owner', 'owner_id', 'title', 'body', 'date_created', 'likes', 'answered', 'answers',
+            'id', 'owner', 'owner_id', 'title', 'body', 'date_created', 'likes', 'answered', 'answers', 'likers',
         ]
 
 
