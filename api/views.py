@@ -37,7 +37,11 @@ class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
         obj = Question.objects.get(id=pk)
         if request.user not in obj.likers.all():
             obj.likers.add(request.user)
-            return Response({'detail': 'Question Favorited'})
+            return Response({'detail': 'Answer favorited'})
+        elif request.user in obj.likers.all():
+            obj.likers.remove(request.user)
+            return Response({'detail': 'UnFavorited'})
+
         return Response({'detail': 'Failure'})
 
 
@@ -68,6 +72,10 @@ class AnswerDetail(generics.RetrieveUpdateDestroyAPIView):
         if request.user not in obj.likers.all():
             obj.likers.add(request.user)
             return Response({'detail': 'Answer favorited'})
+        elif request.user in obj.likers.all():
+            obj.likers.remove(request.user)
+            return Response({'detail': 'UnFavorited'})
+
         return Response({'detail': 'Failure'})
 
 
